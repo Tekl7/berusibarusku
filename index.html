@@ -188,18 +188,6 @@
                 <input type="text" id="name" name="name" required>
             </div>
 
-            <!-- Email -->
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <!-- Phone -->
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-
             <!-- Attendance -->
             <div class="form-group">
                 <label>Will you be attending? *</label>
@@ -215,22 +203,46 @@
                 </div>
             </div>
 
-            <!-- Number of Guests -->
+            <!-- Requires Accommodation -->
             <div class="form-group">
-                <label for="guests">Number of Guests (including yourself) *</label>
-                <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
+                <label>Do you require accommodation? *</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="accommodation" value="Yes" required>
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="accommodation" value="No" required>
+                        No
+                    </label>
+                </div>
             </div>
 
-            <!-- Dietary Restrictions -->
+            <!-- Meat/Veg Meal -->
             <div class="form-group">
-                <label for="dietary">Dietary Restrictions/Allergies</label>
-                <textarea id="dietary" name="dietary" placeholder="Please let us know about any dietary requirements..."></textarea>
+                <label>Meal preference *</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="mealPreference" value="Meat" required>
+                        Meat
+                    </label>
+                    <label>
+                        <input type="radio" name="mealPreference" value="Vegetarian" required>
+                        Vegetarian
+                    </label>
+                </div>
             </div>
 
-            <!-- Special Requests -->
+            <!-- Other Meal Restrictions -->
             <div class="form-group">
-                <label for="specialRequests">Special Requests or Comments</label>
-                <textarea id="specialRequests" name="specialRequests" placeholder="Any special requests or messages..."></textarea>
+                <label for="mealRestrictions">Other meal restrictions/allergies</label>
+                <textarea id="mealRestrictions" name="mealRestrictions" placeholder="Please let us know about any dietary requirements..."></textarea>
+            </div>
+
+            <!-- Other Notes -->
+            <div class="form-group">
+                <label for="otherNotes">Other notes</label>
+                <textarea id="otherNotes" name="otherNotes" placeholder="Any other information you'd like to share..."></textarea>
             </div>
 
             <!-- Submit Button -->
@@ -261,12 +273,11 @@
             const data = {
                 timestamp: new Date().toLocaleString(),
                 name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
                 attendance: formData.get('attendance'),
-                guests: formData.get('guests'),
-                dietary: formData.get('dietary'),
-                specialRequests: formData.get('specialRequests')
+                accommodation: formData.get('accommodation'),
+                mealPreference: formData.get('mealPreference'),
+                mealRestrictions: formData.get('mealRestrictions'),
+                otherNotes: formData.get('otherNotes')
             };
 
             try {
