@@ -5,3 +5,15 @@ Tento svatební web slouží k předání informací mezi námi a svatebčany (h
 ## Architektura webu
 
 Frontend svatebního webu je hostován na GitHub Pages. Web obsahuje formulář, po jehož vyplnění a odeslání se spustí backendová aplikace (Google Apps Script), která zapíše vyplněné informace do Tabulky Google.
+
+## Grafický design
+
+### Barvy
+
+- #345284 - modrá
+- #F9F0D0 - béžová (nebo #FAF4D6 ?)
+- #CC4E00 - cihlová
+
+### Font
+
+- Agrandir
