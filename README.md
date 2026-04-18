@@ -16,4 +16,4 @@ Frontend svatebního webu je hostován na GitHub Pages. Web obsahuje formulář,
 
 ### Font
 
-- Agrandir
+- Telegraf

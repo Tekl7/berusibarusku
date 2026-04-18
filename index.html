@@ -10,27 +10,31 @@
 <body>
 
   <!-- ================================================================
-       HERO — invitation image
+       HERO — split blue/beige with invitation elements
   ================================================================ -->
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
 
-    <div class="hero-side hero-side--left" aria-hidden="true">
-      <div class="hero-names">
-        <span class="hero-name">Jméno</span>
-        <div class="hero-side-diamond"></div>
-        <span class="hero-name">Jméno</span>
-      </div>
-    </div>
+    <!-- Blue top zone + wavy divider rendered as a single SVG -->
+    <svg class="hero-split" viewBox="0 0 1440 810" preserveAspectRatio="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1440,430 C1300,510 1150,330 1000,420 C850,510 700,340 540,430 C380,520 200,360 0,450 L0,0 H1440 Z"
+            fill="#345284"/>
+    </svg>
 
-    <img class="hero-img" src="assets/images/pozvanka-cropped.jpg" alt="Svatební pozvánka" />
+    <!-- Left third: barca, a, vojta -->
+    <img class="hero-el hero-el--barca"   src="assets/images/prvky_z_pozvanky/barca_cropped.png"   alt="Barča">
+    <img class="hero-el hero-el--a"       src="assets/images/prvky_z_pozvanky/a_cropped.png"       alt="">
+    <img class="hero-el hero-el--vojta"   src="assets/images/prvky_z_pozvanky/vojta_cropped.png"   alt="Vojta">
 
-    <div class="hero-side hero-side--right" aria-hidden="true">
-      <div class="hero-date-block">
-        <span class="hero-date-label">Sobota</span>
-        <span class="hero-date-day">DD. MM.</span>
-        <span class="hero-date-year">2026</span>
-      </div>
+    <!-- Centre third: rucicky -->
+    <img class="hero-el hero-el--rucicky" src="assets/images/prvky_z_pozvanky/rucicky_cropped.png" alt="">
+
+    <!-- Right third: datum -->
+    <img class="hero-el hero-el--datum"   src="assets/images/prvky_z_pozvanky/datum_cropped.png"   alt="5. 9. 2026">
+
+    <!-- Welcome text in the beige zone -->
+    <div class="hero-welcome-wrap">
+      <p class="hero-welcome">Vítejte, budeme se brát</p>
     </div>
 
     <div class="scroll-hint" aria-hidden="true">
