@@ -213,14 +213,18 @@ body {
   background: var(--beige);
 }
 
+.info-section .section-inner {
+  max-width: 1400px;
+}
+
 .info-section .section-title {
   color: var(--blue);
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.25rem;
 }
 
 .info-card {
@@ -228,29 +232,29 @@ body {
   border: 1px solid var(--blue-mid);
   border-top: 3px solid var(--blue);
   border-radius: 2px;
-  padding: 2.25rem 1.75rem;
+  padding: 3.25rem 2.5rem;
   text-align: center;
 }
 
 .info-card-icon {
-  width: 44px;
-  height: 44px;
-  margin: 0 auto 1.1rem;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 1.4rem;
   color: var(--blue);
 }
 
 .info-card h3 {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--terra);
-  margin-bottom: 0.85rem;
+  margin-bottom: 1rem;
 }
 
 .info-card p {
-  font-size: 0.98rem;
-  line-height: 1.8;
+  font-size: 1.08rem;
+  line-height: 1.9;
   color: var(--blue);
 }
 
