@@ -376,15 +376,6 @@ footer {
     transform: translateX(-50%);
   }
 
-  /* Scale just the date down, pivoting on the date's actual position
-     inside its canvas (52% across, 70% down of the 1748×2481 PNG) so
-     shrinking doesn't drag it off-alignment. Tune `scale(...)` to taste. */
-  .hero-el--datum {
-    top: -15dvh;                 /* shift the date up (lower = higher on screen) */
-    transform-origin: 52% 70%;
-    transform: translateX(-50%) scale(0.7);
-  }
-
   /* Welcome text moves into the smaller beige strip at the bottom third. */
   .hero-welcome-wrap {
     top: 72dvh;
