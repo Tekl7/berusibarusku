@@ -14,23 +14,54 @@
   ================================================================ -->
   <section class="hero">
 
-    <!-- Blue top zone + wavy divider rendered as a single SVG -->
+    <!-- Blue top zone + wavy divider rendered as a single SVG.
+         Two paths share the viewBox (0 0 1440 810):
+           • .hero-split__wave-desktop  — wave centred around y≈440  (~54% blue)
+           • .hero-split__wave-mobile   — wave centred around y≈540  (~67% blue, i.e. 2/3)
+         CSS shows exactly one of them based on viewport width. -->
     <svg class="hero-split" viewBox="0 0 1440 810" preserveAspectRatio="none"
          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M1440,430 C1300,510 1150,330 1000,420 C850,510 700,340 540,430 C380,520 200,360 0,450 L0,0 H1440 Z"
+      <path class="hero-split__wave-desktop"
+            d="M1440,430 C1300,510 1150,330 1000,420 C850,510 700,340 540,430 C380,520 200,360 0,450 L0,0 H1440 Z"
+            fill="#345284"/>
+      <path class="hero-split__wave-mobile"
+            d="M1440,540 C1300,620 1150,440 1000,530 C850,620 700,450 540,540 C380,630 200,470 0,560 L0,0 H1440 Z"
             fill="#345284"/>
     </svg>
 
+    <!-- Invitation elements.
+         Each <picture> swaps the source per breakpoint:
+           • desktop  → *_cropped.png  (tight crop, positioned individually)
+           • phone    → *.png          (full-canvas uncropped, stacked to recreate invitation)
+         The uncropped PNGs are all 1748×2481 with the element in its original
+         invitation position via transparent padding, so giving them identical
+         width/top/left on mobile reconstructs the invitation automatically. -->
+
     <!-- Left third: barca, a, vojta -->
-    <img class="hero-el hero-el--barca"   src="assets/images/prvky_z_pozvanky/barca_cropped.png"   alt="Barča">
-    <img class="hero-el hero-el--a"       src="assets/images/prvky_z_pozvanky/a_cropped.png"       alt="">
-    <img class="hero-el hero-el--vojta"   src="assets/images/prvky_z_pozvanky/vojta_cropped.png"   alt="Vojta">
+    <picture>
+      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/barca.png">
+      <img class="hero-el hero-el--barca"   src="assets/images/prvky_z_pozvanky/barca_cropped.png"   alt="Barča">
+    </picture>
+    <picture>
+      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/a.png">
+      <img class="hero-el hero-el--a"       src="assets/images/prvky_z_pozvanky/a_cropped.png"       alt="">
+    </picture>
+    <picture>
+      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/vojta.png">
+      <img class="hero-el hero-el--vojta"   src="assets/images/prvky_z_pozvanky/vojta_cropped.png"   alt="Vojta">
+    </picture>
 
     <!-- Centre third: rucicky -->
-    <img class="hero-el hero-el--rucicky" src="assets/images/prvky_z_pozvanky/rucicky_cropped.png" alt="">
+    <picture>
+      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/rucicky.png">
+      <img class="hero-el hero-el--rucicky" src="assets/images/prvky_z_pozvanky/rucicky_cropped.png" alt="">
+    </picture>
 
     <!-- Right third: datum -->
-    <img class="hero-el hero-el--datum"   src="assets/images/prvky_z_pozvanky/datum_cropped.png"   alt="5. 9. 2026">
+    <picture>
+      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/datum.png">
+      <img class="hero-el hero-el--datum"   src="assets/images/prvky_z_pozvanky/datum_cropped.png"   alt="5. 9. 2026">
+    </picture>
 
     <!-- Welcome text in the beige zone -->
     <div class="hero-welcome-wrap">
@@ -51,7 +82,7 @@
   ================================================================ -->
   <section class="info-section">
     <div class="section-inner">
-      <h2 class="section-title">Informace pro hosty</h2>
+      <h2 class="section-title">Informace pro Vás</h2>
       <div class="ornament"><div class="ornament-diamond"></div></div>
 
       <div class="info-grid">
@@ -133,7 +164,7 @@
   ================================================================ -->
   <section class="rsvp-section">
     <div class="section-inner">
-      <h2 class="section-title">Potvrzení účasti</h2>
+      <h2 class="section-title">Informace od Vás</h2>
       <div class="ornament"><div class="ornament-diamond"></div></div>
 
       <div class="rsvp-placeholder">

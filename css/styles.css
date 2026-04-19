@@ -63,7 +63,9 @@ body {
   background: var(--beige);
 }
 
-/* SVG that fills the viewport and draws the blue zone + wave */
+/* SVG that fills the viewport and draws the blue zone + wave.
+   Two wave paths live inside — show desktop wave by default, the
+   mobile one is toggled on in the phone media query further down. */
 .hero-split {
   position: absolute;
   inset: 0;
@@ -71,6 +73,9 @@ body {
   height: 100%;
   z-index: 0;
 }
+
+.hero-split__wave-mobile  { display: none; }
+.hero-split__wave-desktop { display: inline; }
 
 /* ── Individually positioned invitation elements ──────────────────
    Images are tight crops — left/top are the element's actual screen position.
@@ -311,7 +316,47 @@ footer {
 }
 
 /* ------------------------------------------------------------------
-   RESPONSIVE TWEAKS
+   RESPONSIVE TWEAKS — MOBILE HERO
+   On phones the <picture> tags in HTML swap each image to the
+   *uncropped* PNG (the full 1748×2481 invitation canvas with one
+   element opaque). Stacking all five at the same size/position
+   reconstructs the original invitation — so we only need ONE shared
+   rule for all .hero-el.
+   Tune the single `width` / `top` below to resize or reposition
+   the whole invitation block on mobile.
+------------------------------------------------------------------ */
+@media (max-width: 700px) {
+  /* Swap to the 2/3-blue / 1/3-beige wave on phones. */
+  .hero-split__wave-desktop { display: none; }
+  .hero-split__wave-mobile  { display: inline; }
+
+  .hero-el {
+    left: 50%;
+    top: 4dvh;
+    width: 75vw;
+    transform: translateX(-50%);
+  }
+
+  /* Welcome text moves into the smaller beige strip at the bottom third. */
+  .hero-welcome-wrap {
+    top: 72dvh;
+    padding: 0 1.25rem;
+  }
+
+  .hero-welcome {
+    font-size: clamp(1.1rem, 5.5vw, 2rem);
+    letter-spacing: 0.08em;
+  }
+
+  .scroll-hint {
+    bottom: 1.5rem;
+    font-size: 0.65rem;
+  }
+  .scroll-hint svg { width: 18px; height: 18px; }
+}
+
+/* ------------------------------------------------------------------
+   RESPONSIVE TWEAKS — OTHER SECTIONS
 ------------------------------------------------------------------ */
 @media (max-width: 480px) {
   .section-inner { padding: 4rem 1.25rem; }
