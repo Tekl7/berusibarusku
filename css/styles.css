@@ -141,7 +141,7 @@ body {
   text-align: center;
 }
 
-/* Animated scroll hint */
+/* Animated scroll hint — anchor that jumps to #info on click */
 .scroll-hint {
   position: absolute;
   bottom: 2rem;
@@ -156,8 +156,16 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
   animation: scrollBounce 2.2s ease-in-out infinite;
-  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.scroll-hint:hover { opacity: 0.65; }
+.scroll-hint:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 6px;
+  border-radius: 2px;
 }
 .scroll-hint svg {
   width: 22px;
