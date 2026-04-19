@@ -29,39 +29,36 @@
             fill="#345284"/>
     </svg>
 
-    <!-- Invitation elements.
-         Each <picture> swaps the source per breakpoint:
-           • desktop  → *_cropped.png  (tight crop, positioned individually)
-           • phone    → *.png          (full-canvas uncropped, stacked to recreate invitation)
-         The uncropped PNGs are all 1748×2481 with the element in its original
-         invitation position via transparent padding, so giving them identical
-         width/top/left on mobile reconstructs the invitation automatically. -->
-
-    <!-- Left third: barca, a, vojta -->
-    <picture>
-      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/barca.png">
-      <img class="hero-el hero-el--barca"   src="assets/images/prvky_z_pozvanky/barca_cropped.png"   alt="Barča">
-    </picture>
-    <picture>
-      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/a.png">
-      <img class="hero-el hero-el--a"       src="assets/images/prvky_z_pozvanky/a_cropped.png"       alt="">
-    </picture>
-    <picture>
-      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/vojta.png">
-      <img class="hero-el hero-el--vojta"   src="assets/images/prvky_z_pozvanky/vojta_cropped.png"   alt="Vojta">
-    </picture>
-
-    <!-- Centre third: rucicky -->
-    <picture>
-      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/rucicky.png">
-      <img class="hero-el hero-el--rucicky" src="assets/images/prvky_z_pozvanky/rucicky_cropped.png" alt="">
-    </picture>
-
-    <!-- Right third: datum -->
-    <picture>
-      <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/datum.png">
-      <img class="hero-el hero-el--datum"   src="assets/images/prvky_z_pozvanky/datum_cropped.png"   alt="5. 9. 2026">
-    </picture>
+    <!-- Invitation stage: a fixed-aspect-ratio box that holds all hero
+         elements. Everything inside is positioned in % of this box, so
+         the whole composition scales/locks together regardless of
+         viewport aspect ratio. On mobile the stage expands to cover the
+         full hero so the existing stacked-canvas mobile layout still works.
+         Each <picture> swaps source per breakpoint:
+           • desktop → *_cropped.png (tight crops, individually positioned)
+           • phone   → *.png         (full-canvas uncropped, stacked) -->
+    <div class="hero-stage">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/barca.png">
+        <img class="hero-el hero-el--barca"   src="assets/images/prvky_z_pozvanky/barca_cropped.png"   alt="Barča">
+      </picture>
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/a.png">
+        <img class="hero-el hero-el--a"       src="assets/images/prvky_z_pozvanky/a_cropped.png"       alt="">
+      </picture>
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/vojta.png">
+        <img class="hero-el hero-el--vojta"   src="assets/images/prvky_z_pozvanky/vojta_cropped.png"   alt="Vojta">
+      </picture>
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/rucicky.png">
+        <img class="hero-el hero-el--rucicky" src="assets/images/prvky_z_pozvanky/rucicky_cropped.png" alt="">
+      </picture>
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/images/prvky_z_pozvanky/datum.png">
+        <img class="hero-el hero-el--datum"   src="assets/images/prvky_z_pozvanky/datum_cropped.png"   alt="5. 9. 2026">
+      </picture>
+    </div>
 
     <!-- Welcome text in the beige zone -->
     <div class="hero-welcome-wrap">

@@ -61,6 +61,28 @@ body {
   height: 100dvh;
   overflow: hidden;
   background: var(--beige);
+
+  /* Flex centers .hero-stage horizontally; top-aligning keeps the
+     invitation anchored to the top (blue zone) on off-ratio viewports. */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ── Hero stage ──────────────────────────────────────────────────
+   Single reference frame for all invitation elements. Locked to a
+   fixed aspect ratio (--hero-aspect). The whole stage scales up/down
+   to fit the viewport; all children are positioned in % of the stage,
+   so their relative positions/sizes never drift when the window is
+   resized. Change --hero-aspect to re-proportion the desktop layout.
+------------------------------------------------------------------ */
+.hero-stage {
+  --hero-aspect: 16 / 9;
+
+  position: relative;
+  width: min(100%, calc(100dvh * (16 / 9)));
+  aspect-ratio: var(--hero-aspect);
+  z-index: 1;
 }
 
 /* SVG that fills the viewport and draws the blue zone + wave.
@@ -78,10 +100,11 @@ body {
 .hero-split__wave-desktop { display: inline; }
 
 /* ── Individually positioned invitation elements ──────────────────
-   Images are tight crops — left/top are the element's actual screen position.
-   Tune left, top, width to reposition. All values in vw or dvh.
-   Blue zone spans roughly the top 55 dvh of the hero.
-   Columns: left 0–33 vw | centre 33–67 vw | right 67–100 vw
+   All values are % of the .hero-stage (NOT the viewport). Because the
+   stage has a fixed aspect ratio, these proportions stay locked:
+   resizing the window scales the whole composition uniformly instead
+   of drifting apart. Tune left, top, width to reposition.
+   Columns (in stage %): left 0–33 | centre 33–67 | right 67–100
 ------------------------------------------------------------------ */
 .hero-el {
   position: absolute;
@@ -90,33 +113,33 @@ body {
 }
 
 .hero-el--barca {
-  width: 20vw;
-  left: 7vw;
-  top:  6dvh;
+  width: 20%;
+  left: 7%;
+  top:  6%;
 }
 
 .hero-el--a {
-  width: 3vw;
-  left: 19vw;
-  top:  20dvh;
+  width: 3%;
+  left: 19%;
+  top:  20%;
 }
 
 .hero-el--vojta {
-  width: 19vw;
-  left: 20vw;
-  top:  32dvh;
+  width: 19%;
+  left: 20%;
+  top:  32%;
 }
 
 .hero-el--rucicky {
-  width: 15vw;
-  left: 47vw;
-  top:  5dvh;
+  width: 15%;
+  left: 47%;
+  top:  5%;
 }
 
 .hero-el--datum {
-  width: 22vw;
-  left: 70vw;
-  top:  25dvh;
+  width: 22%;
+  left: 70%;
+  top:  25%;
 }
 
 /* ── Welcome text in the beige zone ── */
@@ -337,6 +360,14 @@ footer {
   /* Swap to the 2/3-blue / 1/3-beige wave on phones. */
   .hero-split__wave-desktop { display: none; }
   .hero-split__wave-mobile  { display: inline; }
+
+  /* Drop the fixed-aspect stage on phones — let it cover the whole
+     hero so the existing viewport-based mobile positioning keeps working. */
+  .hero-stage {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
 
   .hero-el {
     left: 50%;
