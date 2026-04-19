@@ -323,16 +323,145 @@ body {
   color: var(--terra);
 }
 
-.rsvp-placeholder {
-  border: 1px dashed rgba(249, 240, 208, 0.25);
-  border-radius: 4px;
-  min-height: 280px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* RSVP form will be placed here */
+/* ── RSVP card ──
+   White card on the blue section — visual sibling of .info-card. */
+.rsvp-card {
+  max-width: 620px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--blue-mid);
+  border-radius: 2px;
+  padding: 3rem 2.5rem 3.25rem;
+  text-align: center;
 }
+
+.rsvp-card__eyebrow {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--terra);
+  margin-bottom: 0.35rem;
+}
+
+.rsvp-card__subtitle {
+  font-size: 0.85rem;
+  color: var(--blue);
+  opacity: 0.6;
+  letter-spacing: 0.06em;
+  margin-bottom: 2.5rem;
+}
+
+/* ── RSVP form — lives inside the white card ── */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+  color: var(--blue);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.form-field > label,
+.form-field > legend {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--terra);
+}
+
+.rsvp-form input[type="text"],
+.rsvp-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  color: var(--blue);
+  border: 1px solid var(--blue-mid);
+  border-radius: 2px;
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.rsvp-form input[type="text"]:focus,
+.rsvp-form textarea:focus {
+  outline: none;
+  border-color: var(--terra);
+  box-shadow: 0 0 0 2px rgba(204, 78, 0, 0.2);
+}
+.rsvp-form textarea {
+  resize: vertical;
+  min-height: 88px;
+  font-family: inherit;
+}
+
+/* Radio pills for the three yes/no-style questions. */
+.form-field--choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.7rem;
+}
+.form-field--choice legend { width: 100%; margin-bottom: 0.15rem; }
+
+.form-field--choice label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.15rem;
+  background: rgba(52, 82, 132, 0.06);
+  border: 1px solid var(--blue-mid);
+  border-radius: 999px;
+  color: var(--blue);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.form-field--choice label:hover {
+  background: rgba(52, 82, 132, 0.12);
+}
+.form-field--choice input[type="radio"] {
+  accent-color: var(--terra);
+}
+.form-field--choice label:has(input[type="radio"]:checked) {
+  background: var(--terra);
+  border-color: var(--terra);
+  color: var(--beige);
+}
+
+.form-submit {
+  align-self: center;
+  margin-top: 0.75rem;
+  padding: 0.95rem 2.6rem;
+  background: var(--terra);
+  color: var(--beige);
+  border: 0;
+  border-radius: 2px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.form-submit:hover { opacity: 0.88; }
+.form-submit:active { transform: translateY(1px); }
+.form-submit:disabled { opacity: 0.5; cursor: progress; }
+
+.form-status {
+  text-align: center;
+  min-height: 1.4em;
+  font-size: 0.92rem;
+  color: var(--blue);
+}
+.form-status--success { color: #1b7f4e; }
+.form-status--error   { color: #a8340e; }
 
 /* ------------------------------------------------------------------
    FOOTER

@@ -164,8 +164,48 @@
       <h2 class="section-title">Informace od Vás</h2>
       <div class="ornament"><div class="ornament-diamond"></div></div>
 
-      <div class="rsvp-placeholder">
-        <!-- RSVP formulář bude umístěn zde -->
+      <div class="rsvp-card">
+        <h3 class="rsvp-card__eyebrow">RLO</h3>
+        <p class="rsvp-card__subtitle">(račte laskavě odpovědět)</p>
+
+        <form id="rsvp-form" class="rsvp-form" novalidate>
+        <div class="form-field">
+          <label for="rsvp-jmeno">Jméno</label>
+          <input id="rsvp-jmeno" name="jmeno" type="text" autocomplete="name" required>
+        </div>
+
+        <fieldset class="form-field form-field--choice">
+          <legend>Zúčastníte se?</legend>
+          <label><input type="radio" name="ucast" value="ano" required> Ano, přijdu</label>
+          <label><input type="radio" name="ucast" value="ne"> Nemohu přijít</label>
+        </fieldset>
+
+        <fieldset class="form-field form-field--choice">
+          <legend>Potřeba ubytování</legend>
+          <label><input type="radio" name="ubytovani" value="ano" required> Ano</label>
+          <label><input type="radio" name="ubytovani" value="ne"> Ne</label>
+        </fieldset>
+
+        <fieldset class="form-field form-field--choice">
+          <legend>Jídlo</legend>
+          <label><input type="radio" name="jidlo" value="maso" required> Maso</label>
+          <label><input type="radio" name="jidlo" value="vege"> Vegetariánské</label>
+        </fieldset>
+
+        <div class="form-field">
+          <label for="rsvp-omezeni">Ostatní jídelní omezení</label>
+          <textarea id="rsvp-omezeni" name="jidelni_omezeni" rows="2"
+                    placeholder="Alergie, bezlepková dieta, …"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="rsvp-poznamky">Ostatní poznámky</label>
+          <textarea id="rsvp-poznamky" name="poznamky" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Odeslat</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -177,5 +217,6 @@
     <p>S láskou &hearts;</p>
   </footer>
 
+  <script src="js/rsvp.js" defer></script>
 </body>
 </html>
