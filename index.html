@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Svatba</title>
+  <title>Svatba B+V</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
 
 </head>
@@ -62,7 +63,7 @@
 
     <!-- Welcome text in the beige zone -->
     <div class="hero-welcome-wrap">
-      <p class="hero-welcome">Vítejte, budeme se brát</p>
+      <p class="hero-welcome">Čeká nás svatba!</p>
     </div>
 
     <a class="scroll-hint" href="#info" aria-label="Přejít na informace">
@@ -84,6 +85,22 @@
 
       <div class="info-grid">
 
+        <!-- Date -->
+        <div class="info-card">
+          <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <h3>Datum a čas</h3>
+          <ul>
+            <li>Sobota, 5. 9. 2026</li>
+            <li>Obřad ve 13:00</li>
+            <li>Prosíme o včasný příchod, ubytovaným doporučujeme mezi 11:30 a 12:00, ostatním nejpozdějí ve 12:30.</li>
+          </ul>
+        </div>
+
         <!-- Location -->
         <div class="info-card">
           <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
@@ -93,50 +110,14 @@
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
           </svg>
           <h3>Místo</h3>
-          <p>
-            Název místa konání<br>
-            Ulice 123, Praha
-          </p>
-          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
-            Otevřít v mapách
-          </a>
+          <ul>
+            <li><a href="https://mapy.com/s/gejenuzucu" target="_blank" rel="noopener noreferrer">Hotel Forea, Opletalova 95, Lanškroun</a></li>
+            <li>Obřad proběhne v zahradě, oslava uvnitř v sálu.</li>
+            <li>Pro hosty s automobilem bude k dispozici parkoviště přímo v areálu.</li>
+          </ul>
         </div>
 
-        <!-- Arrival time -->
-        <div class="info-card">
-          <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.5"
-               stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <h3>Příjezd</h3>
-          <p>
-            Sobota, DD. MM. 2026<br>
-            Příjezd od 14:00<br>
-            Obřad v 15:00
-          </p>
-        </div>
-
-        <!-- Parking -->
-        <div class="info-card">
-          <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.5"
-               stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="3" width="15" height="13" rx="2"/>
-            <path d="M16 8h4l3 5v3h-7V8z"/>
-            <circle cx="5.5" cy="18.5" r="2.5"/>
-            <circle cx="18.5" cy="18.5" r="2.5"/>
-          </svg>
-          <h3>Parkování</h3>
-          <p>
-            Parkoviště přímo<br>
-            u místa konání.<br>
-            Vjezd z ulice XY.
-          </p>
-        </div>
-
-        <!-- Accommodation (optional card) -->
+        <!-- Accommodation -->
         <div class="info-card">
           <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="1.5"
@@ -145,11 +126,74 @@
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
           <h3>Ubytování</h3>
-          <p>
-            Ubytování je zajištěno<br>
-            přímo na místě.<br>
-            Kapacita je omezena.
-          </p>
+          <ul>
+            <li>Pro přespolní zájemce bude ubytování zajištěno v <a href="https://www.hotel.forea.cz/" target="_blank" rel="noopener noreferrer">Hotelu Forea</a>.</li>
+            <li>Odhlášení z pokojů v neděli nejpozději do 12:00.</li>
+          </ul>
+        </div>
+
+        <!-- Dress code -->
+        <div class="info-card">
+          <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7.5 2l3 3 3-3 6.5 3-2 5-3-1v13H6V9L3 10 1 5z"/>
+          </svg>
+          <h3>Dress code</h3>
+          <ul>
+            <li>Vezměte si na sebe něco hezkého, spíše formálního rázu.</li>
+            <li>Pamatujte prosím, že část akce bude probíhat pod širým nebem.</li>
+          </ul>
+        </div>
+
+        <!-- Gifts (flip card: front info / back QR code) -->
+        <div class="info-card-flip" data-flip-card>
+          <div class="info-card-flip__inner">
+
+            <!-- Front face -->
+            <div class="info-card info-card-flip__face info-card-flip__face--front">
+              <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 12 20 22 4 22 4 12"/>
+                <rect x="2" y="7" width="20" height="5"/>
+                <line x1="12" y1="22" x2="12" y2="7"/>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+              </svg>
+              <h3>Dary</h3>
+              <p>Dar, dar, dar, pojďme spolu na bar!</p>
+              <ul>
+                <li>Žádné dary od vás neočekáváme - nejcennější je, že s námi tento den strávíte.</li>
+                <li>Pokud byste nás přesto chtěli obdarovat, potěší nás drobný finanční příspěvek (věcné dary raději ne). V případě zájmu můžete využít <a href="#" data-flip-trigger>QR kód</a>.</li>
+              </ul>
+            </div>
+
+            <!-- Back face (QR code) -->
+            <div class="info-card info-card-flip__face info-card-flip__face--back">
+              <img src="assets/images/qr_kod.png" alt="QR kód pro finanční dar">
+              <button type="button" class="info-card-flip__back-btn" data-flip-close>Zpět</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Food & drinks -->
+        <div class="info-card">
+          <svg class="info-card-icon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v7a3 3 0 0 0 3 3v10"/>
+            <path d="M14 2v7a3 3 0 0 1-3 3"/>
+            <path d="M11 2v7"/>
+            <path d="M18 2c-1.5 0-3 1.5-3 4v6h3v10"/>
+          </svg>
+          <h3>Stravovaní</h3>
+          <ul>
+            <li>Občerstvení bude zajištěno po celý den, oběd formou svatební hostiny, večeře jako raut.</li>
+            <li>Vybrané nápoje budou taktéž zajištěny. Další nápoje, např. tvrdý alkohol, bude k dokoupení na baru.</li>
+            <li>Ubytovaní se mohou těšit na hotelovou snídani.</li>
+          </ul>
         </div>
 
       </div>
@@ -217,6 +261,7 @@
     <p>S láskou &hearts;</p>
   </footer>
 
+  <script src="js/flip.js" defer></script>
   <script src="js/rsvp.js" defer></script>
 </body>
 </html>

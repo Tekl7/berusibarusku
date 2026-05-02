@@ -33,7 +33,7 @@
 :root {
   --blue:       #345284;
   --beige:      #faf4d6;
-  --terra:      #CC4E00;
+  --terra:      #cc4e00;
   --blue-mid:   rgba(52, 82, 132, 0.18);
   --blue-dark:  #243a62;
 }
@@ -259,54 +259,204 @@ body {
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2.25rem;
+  /* Two wide rows on desktop, one per row on phones — handles
+     long body text far better than the previous narrow columns. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  /* All implicit rows share the same height (set by the tallest card),
+     so every card across the grid lines up to a single height. */
+  grid-auto-rows: 1fr;
+  gap: 2rem;
 }
 
+/* Two-column layout inside the card: icon on the left, header + body
+   stacked on the right. Variable-length body text just wraps naturally. */
 .info-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.5rem;
+  row-gap: 0.55rem;
+  align-items: start;
+  align-content: start;
   background: #fff;
   border: 1px solid var(--blue-mid);
   border-top: 3px solid var(--blue);
   border-radius: 2px;
-  padding: 3.25rem 2.5rem;
-  text-align: center;
+  padding: 2.25rem 2.25rem 3.5rem;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.info-card:not(.info-card-flip__face):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -22px rgba(52, 82, 132, 0.28);
+}
+
+/* Default placement: every child sits in the right-hand content column
+   with no inherited margin. */
+.info-card > * {
+  grid-column: 2;
+  margin: 0;
 }
 
 .info-card-icon {
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 1.4rem;
+  grid-column: 1;
+  grid-row: 1;
+  width: 38px;
+  height: 38px;
   color: var(--blue);
+  align-self: start;
 }
 
 .info-card h3 {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   color: var(--terra);
-  margin-bottom: 1rem;
+  align-self: start;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--blue-mid);
+  margin-bottom: 1.4rem;
 }
 
 .info-card p {
-  font-size: 1.08rem;
-  line-height: 1.9;
+  font-size: 1rem;
+  line-height: 1.7;
   color: var(--blue);
 }
 
-.info-card a {
-  display: inline-block;
-  margin-top: 1.1rem;
+.info-card ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.info-card li {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--blue);
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.info-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  background: var(--terra);
+  transform: rotate(45deg);
+}
+
+.info-card > a {
+  justify-self: start;
   color: var(--terra);
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   border-bottom: 1px solid var(--terra);
   padding-bottom: 1px;
+  margin: 0.25rem 0;
   transition: opacity 0.2s;
 }
-.info-card a:hover { opacity: 0.7; }
+.info-card > a:hover { opacity: 0.7; }
+
+.info-card li a {
+  color: var(--terra);
+  text-decoration: none;
+  border-bottom: 1px solid var(--terra);
+  transition: opacity 0.2s;
+}
+.info-card li a:hover { opacity: 0.7; }
+
+/* ── Flip card (Dary) ──
+   Two .info-card faces stacked in a single grid cell, parent rotates
+   on Y axis to reveal the back. .is-flipped is toggled by js/flip.js. */
+.info-card-flip {
+  position: relative;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.info-card-flip:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -22px rgba(52, 82, 132, 0.28);
+}
+
+.info-card-flip__inner {
+  display: grid;
+  grid-template-areas: "stack";
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.65, 0.05, 0.35, 1);
+}
+
+.info-card-flip.is-flipped .info-card-flip__inner {
+  transform: rotateY(180deg);
+}
+
+.info-card-flip__face {
+  grid-area: stack;
+  backface-visibility: hidden;
+}
+
+/* Hide the inactive face from pointer events so the user can only
+   hover/click the side currently facing them. */
+.info-card-flip__face--back            { pointer-events: none; }
+.info-card-flip.is-flipped .info-card-flip__face--front { pointer-events: none; }
+.info-card-flip.is-flipped .info-card-flip__face--back  { pointer-events: auto; }
+
+.info-card-flip__face--back {
+  transform: rotateY(180deg);
+  /* Override .info-card's grid layout — back face centers QR + button. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.info-card-flip__face--back img {
+  width: min(70%, 220px);
+  height: auto;
+  border-radius: 4px;
+}
+
+.info-card-flip__face--back p {
+  font-size: 0.95rem;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+}
+
+.info-card-flip__back-btn {
+  background: none;
+  border: 1px solid var(--terra);
+  color: var(--terra);
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+.info-card-flip__back-btn:hover {
+  background: var(--terra);
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .info-card {
+    column-gap: 1.1rem;
+    padding: 1.75rem 1.5rem;
+  }
+  .info-card-icon { width: 32px; height: 32px; }
+}
 
 /* ------------------------------------------------------------------
    RSVP SECTION

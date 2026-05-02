@@ -11,7 +11,7 @@ Frontend svatebního webu je hostován na GitHub Pages. Web obsahuje formulář,
 ### Barvy
 
 - #345284 - modrá
-- #F9F0D0 - béžová (nebo #FAF4D6 ?)
+- #FAF4D6 - béžová
 - #CC4E00 - cihlová
 
 ### Font
