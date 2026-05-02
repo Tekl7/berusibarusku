@@ -22,3 +22,4 @@ Frontend svatebního webu je hostován na GitHub Pages. Web obsahuje formulář,
 
 - Vložit správný QR kód
 - RLO formulář
+- Heslo na stránky
