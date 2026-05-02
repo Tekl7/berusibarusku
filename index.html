@@ -213,37 +213,39 @@
         <p class="rsvp-card__subtitle">(račte laskavě odpovědět)</p>
 
         <form id="rsvp-form" class="rsvp-form" novalidate>
+        <p class="form-legend"><span class="required" aria-hidden="true">*</span> povinné pole</p>
+
         <div class="form-field">
-          <label for="rsvp-jmeno">Jméno</label>
+          <label for="rsvp-jmeno">Jméno a příjmení <span class="required" aria-hidden="true">*</span></label>
           <input id="rsvp-jmeno" name="jmeno" type="text" autocomplete="name" required>
         </div>
 
         <fieldset class="form-field form-field--choice">
-          <legend>Zúčastníte se?</legend>
-          <label><input type="radio" name="ucast" value="ano" required> Ano, přijdu</label>
-          <label><input type="radio" name="ucast" value="ne"> Nemohu přijít</label>
+          <legend>Zúčastníte se? <span class="required" aria-hidden="true">*</span></legend>
+          <label><input type="radio" name="ucast" value="ano" required> Ano, dorazím</label>
+          <label><input type="radio" name="ucast" value="ne" required> Ne, nedorazím</label>
         </fieldset>
 
         <fieldset class="form-field form-field--choice">
-          <legend>Potřeba ubytování</legend>
+          <legend>Chcete ubytovat v hotelu? <span class="required" aria-hidden="true">*</span></legend>
           <label><input type="radio" name="ubytovani" value="ano" required> Ano</label>
-          <label><input type="radio" name="ubytovani" value="ne"> Ne</label>
+          <label><input type="radio" name="ubytovani" value="ne" required> Ne</label>
         </fieldset>
 
         <fieldset class="form-field form-field--choice">
-          <legend>Jídlo</legend>
-          <label><input type="radio" name="jidlo" value="maso" required> Maso</label>
-          <label><input type="radio" name="jidlo" value="vege"> Vegetariánské</label>
+          <legend>Jaký preferujete oběd? <span class="required" aria-hidden="true">*</span></legend>
+          <label><input type="radio" name="jidlo" value="maso" required> S masem</label>
+          <label><input type="radio" name="jidlo" value="vege" required> Vegetariánský</label>
         </fieldset>
 
         <div class="form-field">
-          <label for="rsvp-omezeni">Ostatní jídelní omezení</label>
+          <label for="rsvp-omezeni">Máte nějaká stravovací omezení?</label>
           <textarea id="rsvp-omezeni" name="jidelni_omezeni" rows="2"
                     placeholder="Alergie, bezlepková dieta, …"></textarea>
         </div>
 
         <div class="form-field">
-          <label for="rsvp-poznamky">Ostatní poznámky</label>
+          <label for="rsvp-poznamky">Chcete nám něco vzkázat?</label>
           <textarea id="rsvp-poznamky" name="poznamky" rows="3"></textarea>
         </div>
 

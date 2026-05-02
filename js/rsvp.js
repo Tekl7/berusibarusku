@@ -36,6 +36,31 @@ const form   = document.getElementById('rsvp-form');
 const status = form.querySelector('.form-status');
 const submit = form.querySelector('.form-submit');
 
+/* Localize the browser's native validation tooltips to Czech.
+   Without this they show in the user's browser locale (often English). */
+form.querySelectorAll('[required]').forEach((el) => {
+  el.addEventListener('invalid', () => {
+    el.setCustomValidity(el.type === 'radio'
+      ? 'Vyberte prosím jednu z možností.'
+      : 'Vyplňte prosím toto pole.');
+  });
+
+  /* On change/input, clear the custom message. For radios we must clear
+     every option in the group — otherwise a leftover message on the
+     unchecked sibling keeps the whole group "invalid" even after the
+     user picks an answer. */
+  const clear = () => {
+    if (el.type === 'radio') {
+      form.querySelectorAll(`input[type="radio"][name="${el.name}"]`)
+          .forEach((r) => r.setCustomValidity(''));
+    } else {
+      el.setCustomValidity('');
+    }
+  };
+  el.addEventListener('input',  clear);
+  el.addEventListener('change', clear);
+});
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!form.reportValidity()) return;
