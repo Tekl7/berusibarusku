@@ -795,7 +795,7 @@ html.gate-locked body > *:not(.gate) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0.85rem;
+  margin-top: 1.75rem;
   padding: 0.85rem 2.5rem;
   font: inherit;
   font-weight: 600;
