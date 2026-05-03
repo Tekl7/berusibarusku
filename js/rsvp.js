@@ -66,7 +66,14 @@ form.querySelectorAll('input[type="radio"][name="ucast"]').forEach((r) => {
   });
 });
 
-/* Clear the inline error as soon as the user fixes the field. */
+const clearFormStatus = () => {
+  status.className = 'form-status';
+  status.textContent = '';
+};
+
+/* Clear the inline error as soon as the user fixes the field. Pokud se
+   pod submitem zobrazila chybová hláška, taky ji uklidíme — ať uživatel
+   ví, že jeho oprava registrujeme. */
 form.querySelectorAll('input, textarea').forEach((el) => {
   const handler = () => {
     if (el.type === 'radio') {
@@ -75,6 +82,9 @@ form.querySelectorAll('input, textarea').forEach((el) => {
       }
     } else if (el.value.trim()) {
       clearFieldError(el);
+    }
+    if (status.classList.contains('form-status--error')) {
+      clearFormStatus();
     }
   };
   el.addEventListener('input',  handler);
@@ -117,6 +127,8 @@ form.addEventListener('submit', async (e) => {
     if (firstInvalid.type !== 'radio') {
       firstInvalid.focus({ preventScroll: true });
     }
+    status.className = 'form-status form-status--error';
+    status.textContent = 'Vyplňte prosím všechna povinná pole.';
     return;
   }
 
