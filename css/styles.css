@@ -655,7 +655,7 @@ body {
   font-size: 0.92rem;
   color: var(--blue);
 }
-.form-status--success { color: #1b7f4e; }
+.form-status--success { color: var(--blue); }
 .form-status--error   { color: #a8340e; }
 
 /* ------------------------------------------------------------------
