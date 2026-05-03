@@ -20,11 +20,14 @@ const unlock = () => {
   localStorage.setItem('wedding-gate', 'ok');
   // Zavře mobilní klávesnici a sundá scroll posun, který si telefon
   // vytvořil, aby na input "viděl" — jinak po odemčení stránka začíná
-  // o kus níž.
+  // o kus níž. Scroll resetujeme dvakrát: hned, znovu po dokreslení
+  // layoutu a ještě po krátké pauze, než klávesnice domizí.
   input.blur();
   html.classList.remove('gate-locked');
   gate.remove();
   window.scrollTo(0, 0);
+  requestAnimationFrame(() => window.scrollTo(0, 0));
+  setTimeout(() => window.scrollTo(0, 0), 250);
 };
 
 if (localStorage.getItem('wedding-gate') === 'ok') {

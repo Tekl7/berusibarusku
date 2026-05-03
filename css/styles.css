@@ -733,6 +733,12 @@ footer {
 ------------------------------------------------------------------ */
 .gate { display: none; }
 
+html.gate-locked,
+html.gate-locked body {
+  overflow: hidden;
+  height: 100%;
+}
+
 html.gate-locked .gate {
   display: flex;
   position: fixed;
