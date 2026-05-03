@@ -792,10 +792,14 @@ html.gate-locked body > *:not(.gate) {
 }
 
 .gate__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 0.85rem;
   padding: 0.85rem 2.5rem;
   font: inherit;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--blue);
