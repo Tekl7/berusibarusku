@@ -7,46 +7,52 @@
  *
  * Heslo měň jen tady. Po správném zadání se uloží do localStorage,
  * takže host už ho při dalších návštěvách na tomto zařízení nezadává.
+ *
+ * IIFE wrap drží proměnné mimo globální scope — bez něj `const form`
+ * koliduje s `const form` v rsvp.js a celý rsvp.js spadne na parse error.
  */
-const GATE_PASSWORD = 'komarisezenili';
+(() => {
+  const GATE_PASSWORD = 'komarisezenili';
 
-const html    = document.documentElement;
-const gate    = document.querySelector('.gate');
-const form    = document.getElementById('gate-form');
-const input   = document.getElementById('gate-input');
-const errorEl = document.getElementById('gate-error');
+  const html    = document.documentElement;
+  const gate    = document.querySelector('.gate');
+  const form    = document.getElementById('gate-form');
+  const input   = document.getElementById('gate-input');
+  const errorEl = document.getElementById('gate-error');
 
-const unlock = () => {
-  localStorage.setItem('wedding-gate', 'ok');
-  // Zavře mobilní klávesnici a sundá scroll posun, který si telefon
-  // vytvořil, aby na input "viděl" — jinak po odemčení stránka začíná
-  // o kus níž. Scroll resetujeme dvakrát: hned, znovu po dokreslení
-  // layoutu a ještě po krátké pauze, než klávesnice domizí.
-  input.blur();
-  html.classList.remove('gate-locked');
-  gate.remove();
-  window.scrollTo(0, 0);
-  requestAnimationFrame(() => window.scrollTo(0, 0));
-  setTimeout(() => window.scrollTo(0, 0), 250);
-};
+  const unlock = () => {
+    localStorage.setItem('wedding-gate', 'ok');
+    // Zavře mobilní klávesnici a sundá scroll posun, který si telefon
+    // vytvořil, aby na input "viděl" — jinak po odemčení stránka začíná
+    // o kus níž. Scroll resetujeme dvakrát: hned, znovu po dokreslení
+    // layoutu a ještě po krátké pauze, než klávesnice domizí.
+    input.blur();
+    html.classList.remove('gate-locked');
+    gate.remove();
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+    setTimeout(() => window.scrollTo(0, 0), 250);
+  };
 
-if (localStorage.getItem('wedding-gate') === 'ok') {
-  // Inline script v <head> už zámek sundal — uklidíme overlay z DOMu.
-  gate.remove();
-} else {
-  input.focus();
-}
-
-form?.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (input.value === GATE_PASSWORD) {
-    unlock();
-  } else {
-    errorEl.textContent = 'Nesprávné heslo. Zkuste to prosím znovu.';
-    input.select();
+  if (localStorage.getItem('wedding-gate') === 'ok') {
+    // Inline script v <head> už zámek sundal — uklidíme overlay z DOMu.
+    gate.remove();
+    return;
   }
-});
 
-input?.addEventListener('input', () => {
-  errorEl.textContent = '';
-});
+  input.focus();
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (input.value === GATE_PASSWORD) {
+      unlock();
+    } else {
+      errorEl.textContent = 'Nesprávné heslo. Zkuste to prosím znovu.';
+      input.select();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    errorEl.textContent = '';
+  });
+})();
