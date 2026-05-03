@@ -510,6 +510,15 @@ body {
   color: var(--blue);
 }
 
+.rsvp-conditional {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.rsvp-conditional[hidden] {
+  display: none;
+}
+
 .form-field {
   display: flex;
   flex-direction: column;

@@ -226,22 +226,24 @@
           <label><input type="radio" name="ucast" value="ne" required> Ne, nedorazím</label>
         </fieldset>
 
-        <fieldset class="form-field form-field--choice">
-          <legend>Chcete ubytovat v hotelu? <span class="required" aria-hidden="true">*</span></legend>
-          <label><input type="radio" name="ubytovani" value="ano" required> Ano</label>
-          <label><input type="radio" name="ubytovani" value="ne" required> Ne</label>
-        </fieldset>
+        <div class="rsvp-conditional" data-rsvp-conditional hidden>
+          <fieldset class="form-field form-field--choice">
+            <legend>Chcete ubytovat v hotelu? <span class="required" aria-hidden="true">*</span></legend>
+            <label><input type="radio" name="ubytovani" value="ano" required> Ano</label>
+            <label><input type="radio" name="ubytovani" value="ne" required> Ne</label>
+          </fieldset>
 
-        <fieldset class="form-field form-field--choice">
-          <legend>Jaký preferujete oběd? <span class="required" aria-hidden="true">*</span></legend>
-          <label><input type="radio" name="jidlo" value="maso" required> S masem</label>
-          <label><input type="radio" name="jidlo" value="vege" required> Vegetariánský</label>
-        </fieldset>
+          <fieldset class="form-field form-field--choice">
+            <legend>Jaký preferujete oběd? <span class="required" aria-hidden="true">*</span></legend>
+            <label><input type="radio" name="jidlo" value="maso" required> S masem</label>
+            <label><input type="radio" name="jidlo" value="vege" required> Vegetariánský</label>
+          </fieldset>
 
-        <div class="form-field">
-          <label for="rsvp-omezeni">Máte nějaká stravovací omezení?</label>
-          <textarea id="rsvp-omezeni" name="jidelni_omezeni" rows="2"
-                    placeholder="Alergie, bezlepková dieta, …"></textarea>
+          <div class="form-field">
+            <label for="rsvp-omezeni">Máte nějaká stravovací omezení?</label>
+            <textarea id="rsvp-omezeni" name="jidelni_omezeni" rows="2"
+                      placeholder="Alergie, bezlepková dieta, …"></textarea>
+          </div>
         </div>
 
         <div class="form-field">

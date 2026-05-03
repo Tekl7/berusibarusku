@@ -36,6 +36,41 @@ const form   = document.getElementById('rsvp-form');
 const status = form.querySelector('.form-status');
 const submit = form.querySelector('.form-submit');
 
+/* Conditional block: ubytování, oběd a stravovací omezení dávají smysl
+   jen pokud host potvrdí účast. Když host vybere "Ne" (nebo zatím nic),
+   pole musí být skrytá i nevalidovaná — `required` na hidden inputu by
+   jinak zablokoval odeslání formuláře. */
+const conditional = form.querySelector('[data-rsvp-conditional]');
+const conditionalRequired = Array.from(
+  conditional.querySelectorAll('[required]')
+);
+
+const setConditionalVisible = (visible) => {
+  conditional.hidden = !visible;
+  conditionalRequired.forEach((el) => {
+    if (visible) {
+      el.setAttribute('required', '');
+    } else {
+      el.removeAttribute('required');
+      el.setCustomValidity('');
+    }
+  });
+  if (!visible) {
+    conditional.querySelectorAll('input[type="radio"]')
+      .forEach((r) => { r.checked = false; });
+    conditional.querySelectorAll('textarea')
+      .forEach((t) => { t.value = ''; });
+  }
+};
+
+setConditionalVisible(false);
+
+form.querySelectorAll('input[type="radio"][name="ucast"]').forEach((r) => {
+  r.addEventListener('change', () => {
+    setConditionalVisible(r.checked && r.value === 'ano');
+  });
+});
+
 /* Localize the browser's native validation tooltips to Czech.
    Without this they show in the user's browser locale (often English). */
 form.querySelectorAll('[required]').forEach((el) => {
