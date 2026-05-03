@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" class="gate-locked">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,8 +7,29 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
 
+  <!-- Gate: pokud byl zámek odemčen v tomto prohlížeči, sundej třídu
+       ještě před vykreslením <body>, aby obsah neprobliskl. -->
+  <script>
+    if (localStorage.getItem('wedding-gate') === 'ok') {
+      document.documentElement.classList.remove('gate-locked');
+    }
+  </script>
 </head>
 <body>
+
+  <!-- ================================================================
+       GATE — heslo z pozvánky
+  ================================================================ -->
+  <div class="gate">
+    <form class="gate__form" id="gate-form">
+      <p class="gate__title">B + V</p>
+      <p class="gate__intro">Tato stránka je chráněná heslem z pozvánky.</p>
+      <input class="gate__input" id="gate-input" type="password"
+             autocomplete="off" placeholder="Heslo" required>
+      <button class="gate__submit" type="submit">Vstoupit</button>
+      <p class="gate__error" id="gate-error" aria-live="polite"></p>
+    </form>
+  </div>
 
   <!-- ================================================================
        HERO — split blue/beige with invitation elements
@@ -271,6 +292,7 @@
     <p>S láskou &hearts;</p>
   </footer>
 
+  <script src="js/gate.js" defer></script>
   <script src="js/flip.js" defer></script>
   <script src="js/rsvp.js" defer></script>
 </body>
