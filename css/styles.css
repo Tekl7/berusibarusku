@@ -498,7 +498,17 @@ body {
   color: var(--blue);
   opacity: 0.6;
   letter-spacing: 0.06em;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.rsvp-card__note {
+  max-width: 36ch;
+  margin: 0 auto 2.5rem;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--blue);
+  opacity: 0.78;
+  line-height: 1.5;
 }
 
 /* ── RSVP form — lives inside the white card ── */
