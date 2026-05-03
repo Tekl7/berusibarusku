@@ -36,6 +36,31 @@ const form   = document.getElementById('rsvp-form');
 const status = form.querySelector('.form-status');
 const submit = form.querySelector('.form-submit');
 
+/* Inline validation messages. Native browser tooltips (`reportValidity()`)
+   are unreliable on mobile — Safari often shows nothing at all and Chrome
+   for Android only flashes a tiny bubble — so we render the error inside
+   the form instead. */
+
+const showFieldError = (field, message) => {
+  const wrap = field.closest('.form-field');
+  if (!wrap) return;
+  let err = wrap.querySelector('.form-field__error');
+  if (!err) {
+    err = document.createElement('p');
+    err.className = 'form-field__error';
+    wrap.appendChild(err);
+  }
+  err.textContent = message;
+  wrap.classList.add('form-field--invalid');
+};
+
+const clearFieldError = (field) => {
+  const wrap = field?.closest('.form-field');
+  if (!wrap) return;
+  wrap.querySelector('.form-field__error')?.remove();
+  wrap.classList.remove('form-field--invalid');
+};
+
 /* Conditional block: ubytování, oběd a stravovací omezení dávají smysl
    jen pokud host potvrdí účast. Když host vybere "Ne" (nebo zatím nic),
    pole musí být skrytá i nevalidovaná — `required` na hidden inputu by
@@ -52,7 +77,7 @@ const setConditionalVisible = (visible) => {
       el.setAttribute('required', '');
     } else {
       el.removeAttribute('required');
-      el.setCustomValidity('');
+      clearFieldError(el);
     }
   });
   if (!visible) {
@@ -71,34 +96,59 @@ form.querySelectorAll('input[type="radio"][name="ucast"]').forEach((r) => {
   });
 });
 
-/* Localize the browser's native validation tooltips to Czech.
-   Without this they show in the user's browser locale (often English). */
-form.querySelectorAll('[required]').forEach((el) => {
-  el.addEventListener('invalid', () => {
-    el.setCustomValidity(el.type === 'radio'
-      ? 'Vyberte prosím jednu z možností.'
-      : 'Vyplňte prosím toto pole.');
-  });
-
-  /* On change/input, clear the custom message. For radios we must clear
-     every option in the group — otherwise a leftover message on the
-     unchecked sibling keeps the whole group "invalid" even after the
-     user picks an answer. */
-  const clear = () => {
+/* Clear the inline error as soon as the user fixes the field. */
+form.querySelectorAll('input, textarea').forEach((el) => {
+  const handler = () => {
     if (el.type === 'radio') {
-      form.querySelectorAll(`input[type="radio"][name="${el.name}"]`)
-          .forEach((r) => r.setCustomValidity(''));
-    } else {
-      el.setCustomValidity('');
+      if (form.querySelector(`input[name="${el.name}"]:checked`)) {
+        clearFieldError(el);
+      }
+    } else if (el.value.trim()) {
+      clearFieldError(el);
     }
   };
-  el.addEventListener('input',  clear);
-  el.addEventListener('change', clear);
+  el.addEventListener('input',  handler);
+  el.addEventListener('change', handler);
 });
+
+const validateRequired = () => {
+  let firstInvalid = null;
+  const seenRadioGroups = new Set();
+
+  form.querySelectorAll('[required]').forEach((el) => {
+    if (el.type === 'radio') {
+      if (seenRadioGroups.has(el.name)) return;
+      seenRadioGroups.add(el.name);
+      const checked = form.querySelector(`input[name="${el.name}"]:checked`);
+      if (!checked) {
+        showFieldError(el, 'Vyberte prosím jednu z možností.');
+        if (!firstInvalid) firstInvalid = el;
+      } else {
+        clearFieldError(el);
+      }
+    } else if (!el.value.trim()) {
+      showFieldError(el, 'Vyplňte prosím toto pole.');
+      if (!firstInvalid) firstInvalid = el;
+    } else {
+      clearFieldError(el);
+    }
+  });
+
+  return firstInvalid;
+};
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  if (!form.reportValidity()) return;
+
+  const firstInvalid = validateRequired();
+  if (firstInvalid) {
+    const wrap = firstInvalid.closest('.form-field');
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (firstInvalid.type !== 'radio') {
+      firstInvalid.focus({ preventScroll: true });
+    }
+    return;
+  }
 
   submit.disabled = true;
   status.className = 'form-status';
@@ -111,6 +161,7 @@ form.addEventListener('submit', async (e) => {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     form.reset();
+    setConditionalVisible(false);
     status.classList.add('form-status--success');
     status.textContent = 'Děkujeme, odpověď jsme zaznamenali!';
   } catch (err) {

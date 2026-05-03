@@ -617,6 +617,18 @@ body {
   color: var(--beige);
 }
 
+.form-field__error {
+  margin: 0;
+  color: var(--terra);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.form-field--invalid > input,
+.form-field--invalid > textarea {
+  border-color: var(--terra);
+}
+
 .form-submit {
   align-self: center;
   margin-top: 0.75rem;
