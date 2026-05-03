@@ -1,36 +1,6 @@
-/* RSVP form → Google Apps Script Web App.
+// RSVP form → Google Apps Script Web App.
 
-   1. Open your Google Sheet → Extensions → Apps Script.
-   2. Paste this into Code.gs:
-
-        function doPost(e) {
-          const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-          const p = e.parameter;
-          sheet.appendRow([
-            new Date(),
-            p.jmeno || '',
-            p.ucast || '',
-            p.ubytovani || '',
-            p.jidlo || '',
-            p.jidelni_omezeni || '',
-            p.poznamky || ''
-          ]);
-          return ContentService
-            .createTextOutput(JSON.stringify({ ok: true }))
-            .setMimeType(ContentService.MimeType.JSON);
-        }
-
-      (Optional: put these headers in row 1 of the sheet —
-       Čas | Jméno | Účast | Ubytování | Jídlo | Omezení | Poznámky)
-
-   3. Deploy → New deployment → Web app
-        - Execute as: Me
-        - Who has access: Anyone
-      Copy the resulting /exec URL and paste it into RSVP_ENDPOINT below.
-   4. Every redeploy changes the URL — use "Manage deployments" → edit
-      existing deployment (version: New version) to keep the same URL. */
-
-const RSVP_ENDPOINT = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec';
+const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzVsUxmuLkiET9VhHc317wYslYaBuRw_Xsa45UI1Q-9HudgDsr0Tp-4uJdrH906NhuJ/exec';
 
 const form   = document.getElementById('rsvp-form');
 const status = form.querySelector('.form-status');
