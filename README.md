@@ -17,8 +17,3 @@ Frontend svatebního webu je hostován na GitHub Pages. Web obsahuje formulář,
 ### Font
 
 - Telegraf
-
-## TODO
-
-- Vložit správný QR kód
-- Heslo na stránky
